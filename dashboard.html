@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenya Fishing Guide - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/jpg" href="LOGO.png" style="border-radius: 50%;">
+</head>
+<body>
+    <header class="dashboard-header">
+        <div class="logo">
+            <img style="border-radius: 50%;" src="LOGO.png" alt="Kenya Fishing Guide Logo" width="86" height="86">
+        </div>
+        <div class="user-profile">
+            <a href="bio.html"><img id="userProfileImage" src="" alt="User Profile"></a>
+            <span id="usernameDisplay">User</span>
+        </div>
+    </header>
+    
+    <nav class="main-nav">
+        <ul>
+            <li><a href="dashboard.html" class="active">Dashboard</a></li>
+            <li><a href="fish-database.html">Fish Database</a></li>
+            <li><a href="catchlog.html">Catch Log</a></li>
+            <li><a href="Fishforecast.html">Fish Forecast</a></li>
+            <li><a href="fish spot and beaches.html">Locations</a></li>
+            <li><a href="fish AI.html">Fish Analyzer</a></li>
+        </ul>
+    </nav>
+    
+    <main class="dashboard-main">
+        <section class="weather-section">
+            <h2>Current Weather</h2>
+            <div class="weather-card">
+                <div class="weather-info">
+                    <div class="location">
+                        <span id="currentLocation">Loading location...</span>
+                    </div>
+                    <div class="temperature">
+                        <span id="currentTemp">--</span>°C
+                    </div>
+                    <div class="conditions">
+                        <span id="weatherConditions">--</span>
+                    </div>
+                </div>
+                <div class="weather-icon">
+                    <img id="weatherIcon" src="" alt="Weather icon">
+                </div>
+            </div>
+        </section>
+        
+        <section class="quick-links">
+            <h2>Quick Actions</h2>
+            <div class="link-cards">
+                <a href="fish-database.html" class="link-card">
+                    <h3>Fish Database</h3>
+                    <p>Explore fish species found in Kenya</p>
+                </a>
+                <a href="catchlog.html" class="link-card">
+                    <h3>Log Catch</h3>
+                    <p>Record your fishing activities</p>
+                </a>
+                <a href="fish spot.html" class="link-card">
+                    <h3>Fishing Spots</h3>
+                    <p>Discover best fishing locations</p>
+                </a>
+            </div>
+        </section>
+        
+        <section class="recent-catches">
+            <h2>Recent Catches</h2>
+            <div class="catches-list" id="recentCatches">
+                <!-- Will be populated by JavaScript -->
+                <p>No recent catches found. Start logging your catches!</p>
+            </div>
+        </section>
+    </main>
+    
+    <script src="js/script.js"></script>
+</body>
+</html>

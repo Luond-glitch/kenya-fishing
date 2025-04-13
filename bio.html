@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="mybio.css">
+    <script src="mybio.js"></script>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+          <h1>My Profile</h1>
+        </div>
+        <form id="profile-form" class="profile-form">
+          <!-- Profile Picture Section -->
+          <div class="profile-picture-section">
+            <div class="avatar-upload">
+              <div class="avatar-edit">
+                <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                <label for="imageUpload"></label>
+              </div>
+              <div class="avatar-preview">
+                <div id="imagePreview" style="background-image: url('default-profile.jpg');">
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Name Field -->
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" class="form-control" required>
+          </div>
+          
+          <!-- Bio Field -->
+          <div class="form-group">
+            <label for="bio">About Me</label>
+            <textarea id="bio" name="bio" class="form-control" rows="4"></textarea>
+            <div class="char-counter"><span id="bio-counter">0</span>/250</div>
+          </div>
+          
+          <!-- Action Buttons -->
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="save-btn">Save Changes</button>
+            <button type="button" class="btn btn-secondary" id="logout-btn">Log Out</button>
+          </div>
+        </form>
+      </div>
+      
+      <!-- Logout Confirmation Modal -->
+      <div id="logout-modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h3>Confirm Logout</h3>
+          <p>Are you sure you want to log out?</p>
+          <div class="modal-actions">
+            <button id="confirm-logout" class="btn btn-danger">Log Out</button>
+            <button id="cancel-logout" class="btn btn-secondary">Cancel</button>
+          </div>
+        </div>
+      </div>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nearby Fishing Spots</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/jpg" href="LOGO.png" style="border-radius: 50%;">
+    
+</head>
+<body>
+    <header>
+        <h1>Nearby Fishing Spots</h1>
+        <p>Find the best fishing locations around you</p>
+    </header>
+
+    <div class="container">
+        <div class="controls">
+            <button id="locateBtn">
+                <span id="btnText">Find Spots Near Me</span>
+                <span id="btnLoader" class="loading" style="display: none;"></span>
+            </button>
+            <select id="radiusSelect">
+                <option value="5">Within 5 km</option>
+                <option value="10" selected>Within 10 km</option>
+                <option value="20">Within 20 km</option>
+                <option value="50">Within 50 km</option>
+            </select>
+        </div>
+
+        <p class="status" id="statusText">Click the button to find fishing spots near your current location</p>
+
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+
+        <div id="spotsList" class="spots-container">
+            <!-- Fishing spots will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        // Sample database of fishing spots (in a real app, this would come from an API)
+        const fishingSpots = [
+            {
+                id: 1,
+                name: "Lakeview Pier",
+                latitude: -1.2921,
+                longitude: 36.8219,
+                description: "Great for freshwater fishing with plenty of tilapia and catfish.",
+                fishTypes: ["Tilapia", "Catfish", "Carp"],
+                rating: 4.5
+            },
+            {
+                id: 2,
+                name: "Ocean Breeze Fishing Spot",
+                latitude: -1.3021,
+                longitude: 36.8319,
+                description: "Saltwater fishing with beautiful ocean views. Best for deep sea fishing.",
+                fishTypes: ["Marlin", "Tuna", "Sailfish"],
+                rating: 4.8
+            },
+            {
+                id: 3,
+                name: "River Bend",
+                latitude: -1.2821,
+                longitude: 36.8119,
+                description: "Quiet river spot perfect for trout fishing.",
+                fishTypes: ["Trout", "Bass", "Perch"],
+                rating: 4.2
+            },
+            {
+                id: 4,
+                name: "Harbor Fishing Dock",
+                latitude: -1.2721,
+                longitude: 36.8019,
+                description: "Convenient dock fishing with equipment rentals available.",
+                fishTypes: ["Snapper", "Grouper", "Mackerel"],
+                rating: 4.0
+            },
+            {
+                id: 5,
+                name: "Secluded Cove",
+                latitude: -1.2621,
+                longitude: 36.7919,
+                description: "Hidden gem with excellent reef fishing opportunities.",
+                fishTypes: ["Parrotfish", "Angelfish", "Butterflyfish"],
+                rating: 4.7
+            }
+        ];
+
+        // DOM elements
+        const locateBtn = document.getElementById('locateBtn');
+        const btnText = document.getElementById('btnText');
+        const btnLoader = document.getElementById('btnLoader');
+        const radiusSelect = document.getElementById('radiusSelect');
+        const statusText = document.getElementById('statusText');
+        const spotsList = document.getElementById('spotsList');
+        let map;
+        let userMarker;
+        let spotsMarkers = [];
+
+        // Initialize the map
+        function initMap(lat, lng) {
+            if (typeof map === 'undefined') {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: { lat, lng },
+                    zoom: 12,
+                    styles: [
+                        {
+                            featureType: "poi",
+                            stylers: [{ visibility: "off" }]
+                        }
+                    ]
+                });
+            } else {
+                map.setCenter({ lat, lng });
+            }
+
+            // Clear existing markers
+            if (userMarker) userMarker.setMap(null);
+            spotsMarkers.forEach(marker => marker.setMap(null));
+            spotsMarkers = [];
+
+            // Add user marker
+            userMarker = new google.maps.Marker({
+                position: { lat, lng },
+                map: map,
+                title: "Your Location",
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    fillColor: "#4285F4",
+                    fillOpacity: 1,
+                    strokeColor: "#ffffff",
+                    strokeWeight: 2,
+                    scale: 8
+                }
+            });
+        }
+
+        // Calculate distance between two coordinates in km
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Earth's radius in km
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = 
+                Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+                Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+
+        // Display fishing spots
+        function displaySpots(userLat, userLng, radius) {
+            spotsList.innerHTML = '';
+            statusText.textContent = `Showing fishing spots within ${radius} km`;
+
+            const nearbySpots = fishingSpots.filter(spot => {
+                const distance = calculateDistance(userLat, userLng, spot.latitude, spot.longitude);
+                spot.distance = distance;
+                return distance <= radius;
+            });
+
+            if (nearbySpots.length === 0) {
+                spotsList.innerHTML = '<p>No fishing spots found within this radius. Try increasing the search distance.</p>';
+                return;
+            }
+
+            // Sort by distance
+            nearbySpots.sort((a, b) => a.distance - b.distance);
+
+            // Add markers to map and create cards
+            nearbySpots.forEach(spot => {
+                // Add marker to map
+                const marker = new google.maps.Marker({
+                    position: { lat: spot.latitude, lng: spot.longitude },
+                    map: map,
+                    title: spot.name,
+                    icon: {
+                        url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                    }
+                });
+                spotsMarkers.push(marker);
+
+                // Create info window
+                const infoWindow = new google.maps.InfoWindow({
+                    content: `
+                        <div style="padding: 10px;">
+                            <h3 style="margin: 0 0 5px; color: #1e88e5;">${spot.name}</h3>
+                            <p style="margin: 0 0 5px;">${spot.description}</p>
+                            <p style="margin: 0 0 5px;"><strong>Distance:</strong> ${spot.distance.toFixed(1)} km</p>
+                            <div style="margin-top: 5px;">
+                                ${spot.fishTypes.map(fish => `<span style="display: inline-block; background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 10px; margin-right: 5px; margin-bottom: 5px; font-size: 12px;">${fish}</span>`).join('')}
+                            </div>
+                        </div>
+                    `
+                });
+
+                marker.addListener('click', () => {
+                    infoWindow.open(map, marker);
+                });
+
+                // Create card
+                const spotCard = document.createElement('div');
+                spotCard.className = 'spot-card';
+                spotCard.innerHTML = `
+                    <h3>${spot.name}</h3>
+                    <span class="distance">${spot.distance.toFixed(1)} km away</span>
+                    <p>${spot.description}</p>
+                    <div class="fish-types">
+                        ${spot.fishTypes.map(fish => `<span class="fish-tag">${fish}</span>`).join('')}
+                    </div>
+                `;
+                spotsList.appendChild(spotCard);
+            });
+
+            // Adjust map bounds to show all markers
+            const bounds = new google.maps.LatLngBounds();
+            bounds.extend(userMarker.getPosition());
+            nearbySpots.forEach(spot => {
+                bounds.extend(new google.maps.LatLng(spot.latitude, spot.longitude));
+            });
+            map.fitBounds(bounds);
+        }
+
+        // Locate button click handler
+        locateBtn.addEventListener('click', () => {
+            btnText.textContent = 'Locating...';
+            btnLoader.style.display = 'inline-block';
+            locateBtn.disabled = true;
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const userLat = position.coords.latitude;
+                        const userLng = position.coords.longitude;
+                        const radius = parseInt(radiusSelect.value);
+
+                        initMap(userLat, userLng);
+                        displaySpots(userLat, userLng, radius);
+
+                        btnText.textContent = 'Update Location';
+                        btnLoader.style.display = 'none';
+                        locateBtn.disabled = false;
+                    },
+                    (error) => {
+                        statusText.textContent = `Error: ${error.message}`;
+                        btnText.textContent = 'Try Again';
+                        btnLoader.style.display = 'none';
+                        locateBtn.disabled = false;
+                    },
+                    { enableHighAccuracy: true, timeout: 10000 }
+                );
+            } else {
+                statusText.textContent = "Geolocation is not supported by your browser";
+                btnText.textContent = 'Try Again';
+                btnLoader.style.display = 'none';
+                locateBtn.disabled = false;
+            }
+        });
+
+        // Radius select change handler
+        radiusSelect.addEventListener('change', () => {
+            if (userMarker) {
+                const userPos = userMarker.getPosition();
+                const radius = parseInt(radiusSelect.value);
+                displaySpots(userPos.lat(), userPos.lng(), radius);
+            }
+        });
+
+        // Load Google Maps API
+        function loadMapScript() {
+            const script = document.createElement('script');
+            script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap`;
+            script.async = true;
+            script.defer = true;
+            document.head.appendChild(script);
+        }
+
+        // Load the map script when page loads
+        window.onload = loadMapScript;
+    </script>
+</body>
+</html>
