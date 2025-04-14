@@ -178,6 +178,7 @@ nav {
     top: 0;
     left: 0;
     cursor: pointer;
+    overflow: scroll;
 }
 
 .upload-label {
@@ -185,6 +186,7 @@ nav {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    
 }
 
 .preview-container {
@@ -304,3 +306,23 @@ footer {
         display: none;
     }
 }
+/* Large devices (desktops, 900px and up) */
+@media (min-width: 900px) {
+    .analysis-container {
+        grid-template-columns: 1fr;
+    }
+  }
+  
+  /* Extra large devices (large desktops, 1200px and up) */
+  @media (min-width: 1200px) {
+    .analysis-container {
+        grid-template-columns: 1fr;
+    }
+  }
+  
+  /* Super large screens (1600px and up) */
+  @media (min-width: 1600px) {
+    .analysis-container {
+        grid-template-columns: 1fr;
+    }
+  }
