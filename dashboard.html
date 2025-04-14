@@ -6,6 +6,8 @@
     <title>Kenya Fishing Guide - Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/jpg" href="LOGO.png" style="border-radius: 50%;">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
     <header class="dashboard-header">
@@ -18,7 +20,7 @@
         </div>
     </header>
     
-    <nav class="main-nav">
+    <nav class="main-nav md:flex">
         <ul>
             <li><a href="dashboard.html" class="active">Dashboard</a></li>
             <li><a href="fish-database.html">Fish Database</a></li>
@@ -28,7 +30,26 @@
             <li><a href="fish AI.html">Fish Analyzer</a></li>
         </ul>
     </nav>
+    <header class="bg-blue-700 text-white p-4 flex justify-between items-center md:hidden">
+        <h1 class="text-xl font-bold">Fishing Dashboard</h1>
+        <!-- Menu icon button -->
+        <button @click="open = !open" class="focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </header>
     
+      <!-- Dropdown Menu (shows only when icon is clicked on mobile) -->
+      <nav x-show="open" class="bg-white shadow-md p-4 space-y-3 md:hidden">
+        <a href="dashboard.html" class="block p-2 rounded hover:bg-blue-100">Dashboard</a>
+        <a href="fish-database.html" class="block p-2 rounded hover:bg-blue-100">Fishing Database</a>
+        <a href="catchlog.html" class="block p-2 rounded hover:bg-blue-100">Catch Log</a>
+        <a href="Fishforecast.html" class="block p-2 rounded hover:bg-blue-100">Fish Forecast</a>
+        <a href="fish spot and beaches.html" class="block p-2 rounded hover:bg-blue-100">Locations</a>
+        <a href="fish AI.html" class="block p-2 rounded hover:bg-blue-100">Fish Analyzer</a>
+      </nav>
     <main class="dashboard-main">
         <section class="weather-section">
             <h2>Current Weather</h2>
@@ -76,7 +97,6 @@
             </div>
         </section>
     </main>
-    
     <script src="js/script.js"></script>
 </body>
 </html>
