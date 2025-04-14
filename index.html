@@ -31,7 +31,7 @@
                 <input type="password" id="login-password" placeholder="Enter your password" required>
             </div>
             
-            <button type="submit" class="auth-btn">Login</button>
+            <button onclick="login()" type="submit" class="auth-btn">Login</button>
             
             <a href="#" class="secondary-action">Forgot Password?</a>
             
@@ -71,10 +71,10 @@
                 <input type="password" id="signup-confirm-password" placeholder="Confirm your password" required>
             </div>
             
-            <button type="submit" class="auth-btn">Sign Up</button>
+            <button type="submit" onclick="register()"class="auth-btn">Register</button>
             
             <div class="form-toggle">
-                Already have an account? <a href="#" onclick="toggleForms()">Log in</a>
+                <a href="index.html">Already have an account? <a href="#" onclick="toggleForms()">Log in</a></a>
             </div>
         </form>
     </div>
@@ -110,8 +110,28 @@
         // Form submission handlers
         document.getElementById('login-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Login functionality would be implemented here');
+            
             // Add actual login logic here
+            function login() {
+      const username = document.getElementById("login-username").value;
+      const password = document.getElementById("login-password").value;
+      const storedUser = localStorage.getItem(username);
+      const errorDiv = document.getElementById("loginError");
+
+      if (storedUser) {
+        const userData = JSON.parse(storedUser);
+        if (userData.password === password) {
+          // Redirect on successful login
+          window.location.href = "dashboard.html";
+          alert('Login succefully!');
+        } else {
+          errorDiv.textContent = "Incorrect password.";
+        }
+      } else {
+        errorDiv.textContent = "User does not exist.";
+      }
+    }
+            
         });
 
         document.getElementById('signup-form').addEventListener('submit', function(e) {
@@ -126,9 +146,48 @@
                 return;
             }
             
-            alert('Account creation would be implemented here');
-            // Add actual signup logic here
+           
         });
+        // registration page
+    function register() {
+      const username = document.getElementById("signup-username").value;
+      const password = document.getElementById("signup-password").value;
+      const email = document.getElementById("signup-email").value;
+      const errorDiv = document.getElementById("registerError");
+
+      if (!username || !password || !email) {
+        errorDiv.textContent = "Please enter both fields.";
+        return;
+      }
+
+      if (localStorage.getItem(username)) {
+        errorDiv.textContent = "Username already exists.";
+      } else {
+        const userData = { username, password };
+        localStorage.setItem(username, JSON.stringify(userData));
+        alert("Account created! You can now log in.");
+        window.location.href = "index.html";
+      }
+    }
+    function login() {
+      const username = document.getElementById("login-username").value;
+      const password = document.getElementById("login-password").value;
+      const storedUser = localStorage.getItem(username);
+      const errorDiv = document.getElementById("loginError");
+
+      if (storedUser) {
+        const userData = JSON.parse(storedUser);
+        if (userData.password === password) {
+          // Redirect on successful login
+          window.location.href = "dashboard.html";
+          alert('Login succefully!');
+        } else {
+          errorDiv.textContent = "Incorrect password.";
+        }
+      } else {
+        errorDiv.textContent = "User does not exist.";
+      }
+    }
             
     </script>
     
