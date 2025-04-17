@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="mybio.css">
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-pic-container" id="profilePicContainer">
+                <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-pic" id="profilePic">
+                <div class="edit-pic-icon">
+                    <i>✏️</i>
+                </div>
+            </div>
+            
+        </div>
+        <div class="profile-name-container">
+      </div>
+        <div class="profile-body">
+            <div class="error-message" id="errorMessage"></div>
+            <div class="success-message" id="successMessage"></div>
+
+            <div class="profile-section">
+                <h3>Personal Information</h3>
+                <div class="profile-field">
+                    <label for="nameInput">Full Name:</label>
+                    <div class="field-input">
+                        <input type="text" id="nameInput" >
+                    </div>
+                </div>
+                <div class="profile-field">
+                    <label for="bioInput">Bio:</label>
+                    <div class="field-input">
+                        <textarea id="bioInput"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <h3>Contact Information</h3>
+                <div class="profile-field">
+                    <label for="emailInput">Email:</label>
+                    <div class="field-input">
+                        <input type="email" id="emailInput" value="">
+                    </div>
+                </div>
+                <div class="profile-field">
+                    <label for="phoneInput">Phone:</label>
+                    <div class="field-input">
+                        <input type="tel" id="phoneInput" value="+1 (555) 123-4567">
+                    </div>
+                </div>
+                <div class="profile-field">
+                    <label for="locationInput">Location:</label>
+                    <div class="field-input">
+                        <input type="text" id="locationInput" value="San Francisco, CA">
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <h3>Professional Information</h3>
+                <div class="profile-field">
+                    <label for="professionInput">Profession:</label>
+                    <div class="field-input">
+                        <input type="text" id="professionInput" value="Web Developer">
+                    </div>
+                </div>
+                <div class="profile-field">
+                    <label for="companyInput">Company:</label>
+                    <div class="field-input">
+                        <input type="text" id="companyInput" value="Tech Solutions Inc.">
+                    </div>
+                </div>
+                <div class="profile-field">
+                    <label for="websiteInput">Website:</label>
+                    <div class="field-input">
+                        <input type="url" id="websiteInput" value="https://janesportfolio.com">
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <div class="left-actions">
+                    <button class="btn btn-change-password" id="changePasswordBtn">
+                        <span>🔒</span> Change Password
+                    </button>
+                </div>
+                <div class="right-actions">
+                    <button class="btn btn-logout" id="logoutBtn">
+                        <span>🚪</span> Log Out
+                    </button>
+                    <button class="btn btn-save" id="saveBtn">
+                        <span>💾</span> Save Changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="mybio.js"></script>
+</body>
+</html>

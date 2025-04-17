@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenya Fishing Guide - Catch Log</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/jpg" href="LOGO.png" style="border-radius: 50%;">
+</head>
+<body>
+    <header class="dashboard-header">
+        <div class="logo">
+            <img style="border-radius: 50%;" src="LOGO.png" alt="Kenya Fishing Guide Logo" width="86" height="86">
+        </div>
+        <div class="user-profile">
+            <a href="bio.html"><img id="userProfileImage" src="" alt="User Profile"></a>
+            <span id="usernameDisplay">User</span>
+        </div>
+    </header>
+    
+    <nav class="main-nav">
+        
+    </nav>
+    
+    <main class="catch-log-main">
+        <h1>Log Your Catch</h1>
+        
+        <form id="catchLogForm" class="catch-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="catchDate">Date</label>
+                    <input type="date" id="catchDate" name="catchDate" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="catchTime">Time</label>
+                    <input type="time" id="catchTime" name="catchTime" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="fishSpecies">Fish Species</label>
+                <select id="fishSpecies" name="fishSpecies" required>
+                    <option value="">Select a fish species</option>
+                    <option value="">ngege</option>
+                    <!-- Will be populated by JavaScript -->
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="catchLocation">Location</label>
+                <select id="catchLocation" name="catchLocation" required>
+                    <option value="">Select location</option>
+                    <option value="Mombasa">Mombasa</option>
+                    <option value="Malindi">Malindi</option>
+                    <option value="Lamu">Lamu</option>
+                    <option value="Watamu">Watamu</option>
+                    <option value="Diani">Diani</option>
+                    <option value="Lake Victoria">Lake Victoria</option>
+                    <option value="Lake Naivasha">Lake Naivasha</option>
+                </select>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="fishWeight">Weight (kg)</label>
+                    <input type="number" id="fishWeight" name="fishWeight" step="0.1" min="0">
+                </div>
+                
+                <div class="form-group">
+                    <label for="fishLength">Length (cm)</label>
+                    <input type="number" id="fishLength" name="fishLength" step="0.1" min="0">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="catchNotes">Notes</label>
+                <textarea id="catchNotes" name="catchNotes" rows="3"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="catchImage">Catch Photo</label>
+                <input type="file" id="catchImage" name="catchImage" accept="image/*">
+                <div class="image-preview" id="catchImagePreview">
+                    <img src="" alt="Catch Image Preview" class="image-preview__image" style="display:none;">
+                    <span class="image-preview__default-text">Catch photo will appear here</span>
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-btn">Log Catch</button>
+        </form>
+        
+        <div class="catch-history">
+            <h2>Your Catch History</h2>
+            <div class="catches-list" id="userCatches">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+    </main>
+    
+    <script src="js/script.js"></script>
+</body>
+</html>

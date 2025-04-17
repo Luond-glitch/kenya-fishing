@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FishTales - Share & Analyze Fish Stories</title>
+    <link rel="stylesheet" href="fish-ai.css">
+    <link rel="icon" type="image/jpg" href="LOGO.png" style="border-radius: 50%;">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">FishTales</div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#stories">Stories</a>
+                <a href="#analyze">Analyze Fish</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <h1>Share Your Fish Stories & Discover Species</h1>
+            <p>Upload your fishing adventures and analyze fish photos with our AI technology</p>
+            <div class="cta-buttons">
+                <button id="share-story-btn" class="btn primary">Share a Story</button>
+                <button id="analyze-fish-btn" class="btn secondary">Analyze Fish Photo</button>
+            </div>
+        </section>
+ <!-- Story Upload Modal -->
+        <div id="story-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Share Your Fish Story</h2>
+                <form id="story-form">
+                    <div class="form-group">
+                        <label for="story-title">Title</label>
+                        <input type="text" id="story-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="story-content">Your Story</label>
+                        <textarea id="story-content" rows="6" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="story-location">Location (optional)</label>
+                        <input type="text" id="story-location">
+                    </div>
+                    <div class="form-group">
+                        <label>Add Photos</label>
+                        <div class="image-uploader">
+                            <div class="upload-area" id="drop-zone">
+                                <input type="file" id="story-images" accept="image/*" multiple>
+                                <label for="story-images" class="upload-label">
+                                    <span>Drag & drop images or click to browse</span>
+                                </label>
+                                <div class="preview-container" id="image-preview"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn primary">Publish Story</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Fish Analysis Section -->
+        <section id="analyze" class="analysis-section">
+            <h2>Analyze Fish Photos</h2>
+            <div class="analysis-container">
+                <div class="upload-area">
+                    <input type="file" id="fish-upload" accept="image/*">
+                    <label for="fish-upload" class="upload-label">
+                        <span>Upload or Take a Photo of Fish</span>
+                        <button id="camera-btn" class="btn secondary">Use Camera</button>
+                    </label>
+                    <video id="camera-feed" autoplay playsinline style="display: none;"></video>
+                    <button id="capture-btn" class="btn primary" style="display: none;">Capture</button>
+                </div>
+                <div class="analysis-results" id="analysis-results">
+                    <div class="placeholder">
+                        <p>Your fish analysis will appear here</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stories Section -->
+        <section id="stories" class="stories-section">
+            <h2>Recent Fish Stories</h2>
+            <div class="stories-grid" id="stories-grid">
+                <!-- Stories will be loaded here dynamically -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year"></span> FishTales. All rights reserved. </p>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                document.getElementById("year").textContent = new Date().getFullYear();
+              });</script>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="camera.js"></script>
+    <script src="analysis.js"></script>
+    <script src="fish-ai.js"></script>
+</body>
+</html>
