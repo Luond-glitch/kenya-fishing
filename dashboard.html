@@ -48,6 +48,36 @@
                 </div>
             </div>
         </section>
+         <!-- Popup Modal for Catch Log Verification -->
+<div id="catchLogModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <h2>Pre-Catch Log Verification</h2>
+      <form id="verificationForm">
+        <label>Are you a fisher?
+          <select name="fisher" required>
+            <option value="">Select</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </label><br><br>
+        <label>Fishing Location:
+          <input type="text" name="location" placeholder="e.g village,county,country" required />
+        </label><br><br>
+        <label>Do you have a fishing license?
+          <select name="license" id="hasLicense" required>
+            <option value="">Select</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </label><br><br>
+        <label id="licenseNumberLabel" style="display:none;">License Number:
+          <input type="text" name="licenseNumber" id="licenseNumber" />
+        </label><br><br>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
         
         <section class="quick-links">
             <h2>Quick Actions</h2>
@@ -55,10 +85,6 @@
                 <a href="fish-database.html" class="link-card">
                     <h3>Fish Database</h3>
                     <p>Explore fish species found in Kenya</p>
-                </a>
-                <a href="catchlog.html" class="link-card">
-                    <h3>Log Catch</h3>
-                    <p>Record your fishing activities</p>
                 </a>
                 <a href="fish spot.html" class="link-card">
                     <h3>Fishing Spots</h3>
@@ -77,5 +103,6 @@
         </section>
     </main>
     <script src="js/script.js"></script>
+    <script src="pop box.js"></script>
 </body>
 </html>
