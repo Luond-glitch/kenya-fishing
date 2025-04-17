@@ -1,146 +1,206 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // DOM Elements
-    const profileForm = document.getElementById('profile-form');
-    const imageUpload = document.getElementById('imageUpload');
-    const imagePreview = document.getElementById('imagePreview');
-    const nameInput = document.getElementById('name');
-    const bioInput = document.getElementById('bio');
-    const bioCounter = document.getElementById('bio-counter');
-    const saveBtn = document.getElementById('save-btn');
-    const logoutBtn = document.getElementById('logout-btn');
-    const logoutModal = document.getElementById('logout-modal');
-    const confirmLogout = document.getElementById('confirm-logout');
-    const cancelLogout = document.getElementById('cancel-logout');
-    const closeModal = document.querySelector('.close');
-  
-    // Load current user data
-    loadUserProfile();
-  
-    // Image upload handler
-    imageUpload.addEventListener('change', function(e) {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-          imagePreview.style.backgroundImage = `url(${event.target.result})`;
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-  
-    // Bio character counter
-    bioInput.addEventListener('input', function() {
-      const currentLength = this.value.length;
-      bioCounter.textContent = currentLength;
+  // DOM Elements
+  const saveBtn = document.getElementById('saveBtn');
+  const logoutBtn = document.getElementById('logoutBtn');
+  const changePasswordBtn = document.getElementById('changePasswordBtn');
+  const profilePicContainer = document.getElementById('profilePicContainer');
+  const profilePic = document.getElementById('profilePic');
+  const errorMessage = document.getElementById('errorMessage');
+  const successMessage = document.getElementById('successMessage');
+
+  // Form fields
+  const nameInput = document.getElementById('nameInput');
+  const professionHeaderInput = document.getElementById('professionHeaderInput');
+  const bioInput = document.getElementById('bioInput');
+  const emailInput = document.getElementById('emailInput');
+  const phoneInput = document.getElementById('phoneInput');
+  const locationInput = document.getElementById('locationInput');
+  const professionInput = document.getElementById('professionInput');
+  const companyInput = document.getElementById('companyInput');
+  const websiteInput = document.getElementById('websiteInput');
+
+  // In a real application, you would fetch the current user data from your backend
+  function fetchUserData() {
+      // Simulating API call
+      setTimeout(() => {
+          // This data would come from your backend in a real app
+          const userData = {
+              name: "",
+              profession: "",
+              bio: "",
+              email: "someone@example.com",
+              phone: "+1 (555) 123-4567",
+              location: "San Francisco, CA",
+              company: "Tech Solutions Inc.",
+              website: "https://sylvester.portfolio.com",
+              profilePicture: "https://via.placeholder.com/150"
+          };
+
+          // Populate form fields
+          nameInput.value = userData.name;
+          professionHeaderInput.value = userData.profession;
+          bioInput.value = userData.bio;
+          emailInput.value = userData.email;
+          phoneInput.value = userData.phone;
+          locationInput.value = userData.location;
+          professionInput.value = userData.profession;
+          companyInput.value = userData.company;
+          websiteInput.value = userData.website;
+          profilePic.src = userData.profilePicture;
+      }, 500);
+  }
+
+  // Initialize with user data
+  fetchUserData();
+
+  // Profile Picture Change Functionality
+  profilePicContainer.addEventListener('click', function() {
+      const fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.accept = 'image/*';
       
-      if (currentLength > 250) {
-        this.value = this.value.substring(0, 250);
-        bioCounter.textContent = 250;
-      }
-    });
-  
-    // Form submission
-    profileForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      saveProfile();
-    });
-  
-    // Logout button click
-    logoutBtn.addEventListener('click', function() {
-      logoutModal.style.display = 'block';
-    });
-  
-    // Modal close handlers
-    closeModal.addEventListener('click', function() {
-      logoutModal.style.display = 'none';
-    });
-  
-    cancelLogout.addEventListener('click', function() {
-      logoutModal.style.display = 'none';
-    });
-  
-    confirmLogout.addEventListener('click', function() {
-      performLogout();
-    });
-  
-    // Close modal when clicking outside
-    window.addEventListener('click', function(e) {
-      if (e.target === logoutModal) {
-        logoutModal.style.display = 'none';
-      }
-    });
-  
-    // Functions
-    function loadUserProfile() {
-      // In a real app, you will fetch this from your backend
-      const userData = {
-        name: '',
-        bio: '',
-        profileImage: 'default-profile.jpg'
-      };
-  
-      nameInput.value = userData.name;
-      bioInput.value = userData.bio;
-      bioCounter.textContent = userData.bio.length;
-      imagePreview.style.backgroundImage = `url(${userData.profileImage})`;
-    }
-  
-    function saveProfile() {
-      const formData = new FormData();
-      const imageFile = imageUpload.files[0];
-      
-      if (imageFile) {
-        formData.append('profileImage', imageFile);
-      }
-      
-      formData.append('name', nameInput.value);
-      formData.append('bio', bioInput.value);
-  
-      // Show loading state
-      saveBtn.disabled = true;
-      saveBtn.textContent = 'Saving...';
-  
-      // In a real app, you would send this to your backend
-      // Example using fetch API:
-      fetch('/api/profile/update', {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.json())
-      .then(data => {
-        // Handle success
-        showToast('Profile updated successfully!');
-        saveBtn.disabled = false;
-        saveBtn.textContent = 'Save Changes';
-      })
-      .catch(error => {
-        // Handle error
-        console.error('Error:', error);
-        showToast('Error updating profile. Please try again.', 'error');
-        saveBtn.disabled = false;
-        saveBtn.textContent = 'Save Changes';
+      fileInput.addEventListener('change', function(e) {
+          const file = e.target.files[0];
+          if (file) {
+              if (file.size > 2 * 1024 * 1024) { // 2MB limit
+                  showError('Image size should be less than 2MB');
+                  return;
+              }
+              
+              const reader = new FileReader();
+              reader.onload = function(event) {
+                  profilePic.src = event.target.result;
+              };
+              reader.readAsDataURL(file);
+          }
       });
-    }
-  
-    function performLogout() {
-      // In a real app, you would call your logout API
-      fetch('/api/auth/logout', {
-        method: 'POST'
-      })
-      .then(response => {
-        if (response.ok) {
-          // Redirect to login page
-          window.location.href = '/login';
-        }
-      })
-      .catch(error => {
-        console.error('Logout error:', error);
-        showToast('Logout failed. Please try again.', 'error');
-      });
-    }
-  
-    function showToast(message, type = 'success') {
-      // Implement your toast notification system here
-      alert(message); // Simple fallback
-    }
+      
+      fileInput.click();
   });
+
+  // Save Changes Functionality
+  saveBtn.addEventListener('click', async function() {
+      // Validate inputs
+      if (!nameInput.value.trim()) {
+          showError('Please enter your name');
+          return;
+      }
+
+      if (!emailInput.value.trim()) {
+          showError('Please enter your email');
+          return;
+      }
+
+      // Simple email validation
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+          showError('Please enter a valid email address');
+          return;
+      }
+
+      // Prepare data to send to server
+      const formData = new FormData();
+      formData.append('name', nameInput.value.trim());
+      formData.append('profession', professionInput.value.trim());
+      formData.append('bio', bioInput.value.trim());
+      formData.append('email', emailInput.value.trim());
+      formData.append('phone', phoneInput.value.trim());
+      formData.append('location', locationInput.value.trim());
+      formData.append('company', companyInput.value.trim());
+      formData.append('website', websiteInput.value.trim());
+
+      // If a new profile picture was selected
+      if (profilePic.src.startsWith('data:')) {
+          formData.append('profile_picture', dataURLtoBlob(profilePic.src));
+      }
+
+      // Show loading state
+      saveBtn.classList.add('loading');
+      saveBtn.disabled = true;
+
+      try {
+          // In a real application, you would send this data to your backend
+          // Simulating API call with timeout
+          await new Promise(resolve => setTimeout(resolve, 1500));
+          
+          // Show success message
+          showSuccess('Profile updated successfully!');
+          
+          // In a real app, you might redirect or refresh data here
+      } catch (error) {
+          showError('Failed to update profile. Please try again.');
+          console.error('Update error:', error);
+      } finally {
+          saveBtn.classList.remove('loading');
+          saveBtn.disabled = false;
+      }
+  });
+
+  // Logout Functionality
+  logoutBtn.addEventListener('click', function() {
+      if (confirm('Are you sure you want to log out?')) {
+          // In a real app, this would redirect to logout endpoint or clear session
+          console.log('User logged out');
+          // window.location.href = '/logout'; // Uncomment in real implementation
+          showSuccess('You have been logged out successfully.');
+          
+          // Simulate redirect after logout
+          setTimeout(() => {
+              window.location.href = 'index.html';
+          }, 1500);
+      }
+  });
+
+  // Change Password Functionality
+  changePasswordBtn.addEventListener('click', function() {
+      // In a real app, this would open a change password modal or redirect
+      console.log('Change password clicked');
+      alert('Redirecting to password change page...');
+      // window.location.href = '/change-password';
+  });
+
+  // Helper function to show error messages
+  function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.style.display = 'block';
+      successMessage.style.display = 'none';
+      
+      // Hide error after 5 seconds
+      setTimeout(() => {
+          errorMessage.style.display = 'none';
+      }, 5000);
+  }
+
+  // Helper function to show success messages
+  function showSuccess(message) {
+      successMessage.textContent = message;
+      successMessage.style.display = 'block';
+      errorMessage.style.display = 'none';
+      
+      // Hide success after 5 seconds
+      setTimeout(() => {
+          successMessage.style.display = 'none';
+      }, 5000);
+  }
+
+  // Helper function to convert data URL to Blob for upload
+  function dataURLtoBlob(dataURL) {
+      const arr = dataURL.split(',');
+      const mime = arr[0].match(/:(.*?);/)[1];
+      const bstr = atob(arr[1]);
+      let n = bstr.length;
+      const u8arr = new Uint8Array(n);
+      
+      while (n--) {
+          u8arr[n] = bstr.charCodeAt(n);
+      }
+      
+      return new Blob([u8arr], { type: mime });
+  }
+
+  // Keyboard accessibility
+  document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && document.activeElement.tagName !== 'TEXTAREA') {
+          saveBtn.click();
+      }
+  });
+});
