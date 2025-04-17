@@ -116,7 +116,6 @@ document.addEventListener('DOMContentLoaded', function() {
       // Show loading state
       saveBtn.classList.add('loading');
       saveBtn.disabled = true;
-
       try {
           // In a real application, you would send this data to your backend
           // Simulating API call with timeout
