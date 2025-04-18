@@ -14,10 +14,10 @@
             <img style="border-radius: 50%;" src="LOGO.png" alt="Kenya Fishing Guide Logo" width="86" height="86">
         </div>
         <div class="user-profile">
-            <div class="language-selector">
-                <button onclick="toggleLanguageDropdown()" class="language-btn">🌐 Language</button>
-                <div id="languageDropdown" class="language-dropdown" style="display:none;">
-                    <div id="google_translate_element"></div>
+            <div class="dropdown">
+                <div class="dropdown-button" id="dropdownBtn">🌐 Select Language</div>
+                <div class="dropdown-content" id="dropdownContent"> 
+                 <div id="google_translate_element"></div>
                 </div>
             </div>
             <a href="bio.html"><img id="userProfileImage" src="" alt="User Profile"></a>
@@ -109,27 +109,131 @@
             </div>
         </section>
     </main>
-    <script type="text/javascript">
-        function toggleLanguageDropdown() {
-            const dropdown = document.getElementById("languageDropdown");
-            dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+    <script>
+        const dropdownBtn = document.getElementById('dropdownBtn');
+    const dropdownContent = document.getElementById('dropdownContent');
+    const languageList = document.getElementById('languageList');
+    const searchInput = document.getElementById('searchInput');
+
+    let originalTextMap = new Map();
+
+    function populateLanguages(filter = '') {
+      languageList.innerHTML = '';
+      languages
+        .filter(lang => lang.name.toLowerCase().includes(filter.toLowerCase()))
+        .forEach(lang => {
+          const div = document.createElement('div');
+          div.textContent = lang.name;
+          div.onclick = () => {
+            dropdownBtn.textContent = lang.name;
+            dropdownContent.classList.remove('show');
+            translatePage(lang.code);
+          };
+          languageList.appendChild(div);
+        });
+    }
+
+    function getTextNodes(element) {
+      const textNodes = [];
+      const walker = document.createTreeWalker(
+        element,
+        NodeFilter.SHOW_TEXT,
+        {
+          acceptNode: function(node) {
+            // Ignore script/style/text inside dropdown
+            if (!node.parentElement) return NodeFilter.FILTER_REJECT;
+            const tag = node.parentElement.tagName.toLowerCase();
+            if (["script", "style", "noscript", "input", "textarea"].includes(tag)) {
+              return NodeFilter.FILTER_REJECT;
+            }
+            if (!node.textContent.trim()) {
+              return NodeFilter.FILTER_REJECT;
+            }
+            return NodeFilter.FILTER_ACCEPT;
+          }
+        },
+        false
+      );
+
+      while (walker.nextNode()) {
+        textNodes.push(walker.currentNode);
+      }
+
+      return textNodes;
+    }
+
+    async function translatePage(targetLang) {
+      if (targetLang === "en") {
+        // Revert to original English
+        for (let [node, text] of originalTextMap.entries()) {
+          node.textContent = text;
         }
-    
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'af,am,ar,az,be,bg,bn,bs,ca,ceb,cs,cy,da,de,el,en,sw,eo,es,et,eu,fa,fi,fr,ga,gl,gu,ha,haw,hi,hmn,hr,ht,hu,hy,id,ig,is,it,iw,ja,jw,ka,kk,km,kn,ko,ku,ky,la,lb,lo,lt,lv,mg,mi,mk,ml,mn,mr,ms,mt,my,ne,nl,no,ny,pa,pl,ps,pt,ro,ru,rw,sd,si,sk,sl,sm,sn,so,sq,sr,st,su,sv,sw,ta,te,tg,th,tk,tl,tr,ug,uk,ur,uz,vi,xh,yi,yo,zh,zu',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-            }, 'google_translate_element');
+        return;
+      }
+
+      const textNodes = getTextNodes(document.body);
+
+      for (let node of textNodes) {
+        if (!originalTextMap.has(node)) {
+          originalTextMap.set(node, node.textContent);
         }
-        // Set the dropdown to the current selected language
-  const savedLang = localStorage.getItem("preferredLanguage");
-  if (savedLang) {
-    document.getElementById("google_translate_element").value = savedLang;
-  }
+
+        const translated = await translateText(node.textContent, "en", targetLang);
+        node.textContent = translated;
+      }
+    }
+
+    async function translateText(text, sourceLang, targetLang) {
+      try {
+        const response = await fetch("https://libretranslate.de/translate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            q: text,
+            source: sourceLang,
+            target: targetLang,
+            format: "text"
+          })
+        });
+
+        const data = await response.json();
+        return data.translatedText;
+      } catch (err) {
+        console.error("Translation error:", err);
+        return text;
+      }
+    }
+
+    dropdownBtn.onclick = () => {
+      dropdownContent.classList.toggle('show');
+      searchInput.focus();
+    };
+
+    searchInput.addEventListener('input', () => {
+      populateLanguages(searchInput.value);
+    });
+
+    window.addEventListener('click', (e) => {
+      if (!e.target.closest('.dropdown')) {
+        dropdownContent.classList.remove('show');
+      }
+    });
+
+    // Load languages
+    populateLanguages();
     </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script src="js/script.js"></script>
     <script src="pop box.js"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'af,am,ar,az,be,bg,bn,bs,ca,ceb,cs,cy,da,de,el,en,eo,es,et,eu,fa,fi,fr,ga,gl,gu,ha,haw,hi,hmn,hr,ht,hu,hy,id,ig,is,it,iw,ja,jw,ka,kk,km,kn,ko,ku,ky,la,lb,lo,lt,lv,mg,mi,mk,ml,mn,mr,ms,mt,my,ne,nl,no,ny,pa,pl,ps,pt,ro,ru,rw,sd,si,sk,sl,sm,sn,so,sq,sr,st,su,sv,sw,ta,te,tg,th,tk,tl,tr,ug,uk,ur,uz,vi,xh,yi,yo,zh,zu',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+          }, 'google_translate_element');
+        }
+      </script>
+      
+      <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
