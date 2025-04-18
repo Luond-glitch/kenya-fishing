@@ -6,6 +6,7 @@
     <title>Kenya Fishing Guide - Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/jpg" href="LOGO.png" style="border-radius: 50%;">
+    
 </head>
 <body>
     <header class="dashboard-header">
@@ -13,6 +14,12 @@
             <img style="border-radius: 50%;" src="LOGO.png" alt="Kenya Fishing Guide Logo" width="86" height="86">
         </div>
         <div class="user-profile">
+            <div class="language-selector">
+                <button onclick="toggleLanguageDropdown()" class="language-btn">🌐 Language</button>
+                <div id="languageDropdown" class="language-dropdown" style="display:none;">
+                    <div id="google_translate_element"></div>
+                </div>
+            </div>
             <a href="bio.html"><img id="userProfileImage" src="" alt="User Profile"></a>
             <span id="usernameDisplay"></span>
         </div>
@@ -102,6 +109,26 @@
             </div>
         </section>
     </main>
+    <script type="text/javascript">
+        function toggleLanguageDropdown() {
+            const dropdown = document.getElementById("languageDropdown");
+            dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+        }
+    
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'af,am,ar,az,be,bg,bn,bs,ca,ceb,cs,cy,da,de,el,en,sw,eo,es,et,eu,fa,fi,fr,ga,gl,gu,ha,haw,hi,hmn,hr,ht,hu,hy,id,ig,is,it,iw,ja,jw,ka,kk,km,kn,ko,ku,ky,la,lb,lo,lt,lv,mg,mi,mk,ml,mn,mr,ms,mt,my,ne,nl,no,ny,pa,pl,ps,pt,ro,ru,rw,sd,si,sk,sl,sm,sn,so,sq,sr,st,su,sv,sw,ta,te,tg,th,tk,tl,tr,ug,uk,ur,uz,vi,xh,yi,yo,zh,zu',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+        // Set the dropdown to the current selected language
+  const savedLang = localStorage.getItem("preferredLanguage");
+  if (savedLang) {
+    document.getElementById("google_translate_element").value = savedLang;
+  }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script src="js/script.js"></script>
     <script src="pop box.js"></script>
 </body>
