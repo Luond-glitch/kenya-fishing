@@ -807,13 +807,16 @@ body {
     }
     
     .language-btn {
-        padding: 8px 12px;
+        padding: 12px;
         border: none;
         background-color: #007BFF;
         color: white;
-        border-radius: 8px;
+        border-radius: 40%;
         cursor: pointer;
         font-weight: bold;
+        display: flex;
+      align-items: center;
+      margin: 5px 0;
     }
     
     .language-dropdown {
@@ -827,5 +830,23 @@ body {
         border-radius: 10px;
         border: 1px solid #ccc;
         max-width: 300px;
+        display: flex;
+      align-items: center;
+      margin: 5px 0;
     }
-    
+    #google_translate_element{
+        display: flex;
+        align-items: center;
+        margin: 5px 0;
+    }
+     /* Mobile responsiveness */
+     @media screen and (max-width: 600px) {
+        .language-dropdown {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        #google_translate_element{
+            flex-direction: column;
+          align-items: flex-start;
+        }
+     }
