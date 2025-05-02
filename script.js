@@ -97,6 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } else if (document.getElementById('catchLogForm')) {
         initCatchLog();
     }
+    
 });
 
     
