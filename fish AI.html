@@ -16,6 +16,7 @@
                 <a href="#stories">Stories</a>
                 <a href="#analyze">Analyze Fish</a>
             </div>
+            <button class="menu-toggle" id="menuToggle">☰</button>
         </nav>
     </header>
 
@@ -113,5 +114,16 @@
     <script src="camera.js"></script>
     <script src="analysis.js"></script>
     <script src="fish-ai.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            
+            menuToggle.addEventListener('click', function() {
+                console.log("Button clicked!"); // Debugging
+                navLinks.classList.toggle('active');
+            });
+        });
+    </script>
 </body>
 </html>
