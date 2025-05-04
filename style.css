@@ -421,6 +421,15 @@ input:focus {
     background-color: #f4f4f4;
 }
 
+.image-preview__image {
+    max-width: 100%;
+    max-height: 300px;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    border-radius: 6px;
+}
 
 
 
