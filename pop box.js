@@ -19,8 +19,9 @@ document.querySelector('a[href="catchlog.html"]').addEventListener('click', func
     const location = this.location.value;
     const hasLicense = this.license.value;
     const licenseNumber = this.licenseNumber.value.trim();
-  
-    if (!isFisher || !location || !hasLicense) {
+    const pasword = this.password.value;
+    
+    if (!isFisher || !location || !hasLicense || !pasword) {
       alert("Please fill in all the fields to access catchlog!");
       return;
     }

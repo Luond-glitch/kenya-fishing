@@ -71,17 +71,18 @@
 
           <label>Fishing Location:
             <input type="text" name="location" placeholder="e.g village,county,country" required />
-          </label><br><br>
-
-          <label>Do you have a fishing license?
+          </label><br>
+          <label for="pswd">Password:
+             <input type="password" name="password" id="password" maxlength="4" required>
+          </label>
+          <label>Do you have a fishing license/ boat number?
             <select name="license" id="hasLicense" required>
               <option value="">Select</option>
               <option value="yes">Yes</option>
               <option value="no">No</option>
             </select>
           </label><br><br>
-
-          <label id="licenseNumberLabel" style="display:none;">License Number:
+          <label id="licenseNumberLabel" style="display:none;">Boat Number/ License Number:
             <input type="text" name="licenseNumber" id="licenseNumber" />
           </label><br><br>
 
@@ -102,15 +103,6 @@
           <h3>Fishing Spots</h3>
           <p>Discover best fishing locations</p>
         </a>
-      </div>
-    </section>
-
-    <!-- Recent Catches Section -->
-    <section class="recent-catches">
-      <h2>Recent Catches</h2>
-      <div class="catches-list" id="recentCatches">
-        <!-- Dynamic content populated by JavaScript -->
-        <p>No recent catches found. Start logging your catches!</p>
       </div>
     </section>
   </main>

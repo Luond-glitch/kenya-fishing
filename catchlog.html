@@ -39,10 +39,8 @@
             </div>
             
             <div class="form-group">
-                <label for="fishSpecies">Fish Species</label>
-                <select id="fishSpecies" name="fishSpecies" required>
-                    <option value="">Select a fish species</option>
-                    <option value="">ngege</option>
+                <label for="fishSpecies">Fish Species/ Name</label>
+                <input type="text" id="fishSpecies" name="fishSpecies" placeholder="e.g Nileperch" required>
                     <!-- Will be populated by JavaScript -->
                 </select>
             </div>
@@ -92,12 +90,29 @@
         
         <div class="catch-history">
             <h2>Your Catch History</h2>
-            <div class="catches-list" id="userCatches">
+            <table class="catch-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Fish Name</th>
+                        <th>Location</th>
+                        <th>Weight (kg)</th>
+                        <th>Length (cm)</th>
+                        <th>Image</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody id="userCatches">
+                    <!-- Catch rows will be inserted here -->
+                </tbody>
+            </table>
+            
                 <!-- Will be populated by JavaScript -->
             </div>
         </div>
     </main>
     
-    <script src="js/script.js"></script>
+    <script src="catchlog.js"></script>
 </body>
 </html>
