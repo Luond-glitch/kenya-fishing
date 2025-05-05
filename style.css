@@ -416,6 +416,36 @@ input:focus {
     padding: 8px;
     text-align: center;
 }
+/* Responsive notes column */
+.catch-table td:nth-child(8) {
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Responsive handling for small screens */
+@media (max-width: 768px) {
+    .catch-table {
+        font-size: 0.8rem;
+    }
+
+    .catch-table td:nth-child(8) {
+        max-width: 100px;
+    }
+
+    .catch-table th,
+    .catch-table td {
+        padding: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .catch-table {
+        display: block;
+        overflow-x: auto;
+    }
+}
 
 .catch-table th {
     background-color: #f4f4f4;
