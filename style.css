@@ -424,7 +424,7 @@ input:focus {
 /* Scrollable Notes column */
 .catch-table td:nth-child(8) {
     max-width: 150px;
-    height: 60px;
+    height: 100px;
     overflow: auto;
     white-space: normal;
     display: block;
@@ -504,7 +504,6 @@ input:focus {
     .catch-table tbody tr {
         display: flex;
         flex-wrap: nowrap;
-        overflow-x: auto;
     }
 
     .catch-table td,
