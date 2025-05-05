@@ -408,6 +408,7 @@ input:focus {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    table-layout: fixed; /* Ensures fixed column widths */
 }
 
 .catch-table th,
@@ -415,42 +416,31 @@ input:focus {
     border: 1px solid #ccc;
     padding: 8px;
     text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-size: 0.9rem;
 }
-/* Responsive notes column */
+
+/* Scrollable Notes column */
 .catch-table td:nth-child(8) {
     max-width: 150px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    height: 60px;
+    overflow: auto;
+    white-space: normal;
+    display: block;
 }
 
-/* Responsive handling for small screens */
-@media (max-width: 768px) {
-    .catch-table {
-        font-size: 0.8rem;
-    }
-
-    .catch-table td:nth-child(8) {
-        max-width: 100px;
-    }
-
-    .catch-table th,
-    .catch-table td {
-        padding: 6px;
-    }
-}
-
-@media (max-width: 480px) {
-    .catch-table {
-        display: block;
-        overflow-x: auto;
-    }
+/* Make Notes header follow same width */
+.catch-table th:nth-child(8) {
+    max-width: 150px;
+    display: block;
 }
 
 .catch-table th {
     background-color: #f4f4f4;
 }
 
+/* Image preview styling */
 .image-preview__image {
     max-width: 100%;
     max-height: 300px;
@@ -461,39 +451,69 @@ input:focus {
     border-radius: 6px;
 }
 
-
-
-/* Responsive Styles */
+/* Responsive for medium screens */
 @media (max-width: 768px) {
+    .catch-table {
+        font-size: 0.8rem;
+    }
+
+    .catch-table td:nth-child(8),
+    .catch-table th:nth-child(8) {
+        max-width: 120px;
+    }
+
+    .catch-table th,
+    .catch-table td {
+        padding: 6px;
+    }
+
     .form-row {
         flex-direction: column;
         gap: 0;
     }
-    
+
     .main-nav ul {
         flex-direction: column;
     }
-    
-    .link-cards {
-        grid-template-columns: 1fr;
-    }
-    
+
+    .link-cards,
     .fish-list {
         grid-template-columns: 1fr;
     }
-    
+}
+
+/* Responsive for small screens */
+@media (max-width: 480px) {
     .catch-table {
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-        overflow: scroll;
+        display: block;
+        overflow-x: auto;
     }
-    
-    .catch-table-meta {
-        text-align: center;
-        margin-top: 10px;
+
+    .catch-table thead,
+    .catch-table tbody,
+    .catch-table th,
+    .catch-table td,
+    .catch-table tr {
+        display: block;
+    }
+
+    .catch-table thead tr {
+        display: flex;
+    }
+
+    .catch-table tbody tr {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+
+    .catch-table td,
+    .catch-table th {
+        min-width: 120px;
+        flex: 1;
     }
 }
+
 /* fish spot and beaches locator*/
 
 body {
