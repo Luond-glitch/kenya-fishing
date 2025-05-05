@@ -40,10 +40,8 @@ document.getElementById('catchLogForm').addEventListener('submit', function (eve
 
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (!currentUser) {
-         // Temporarily allow guest user
-    currentUser = { id: 'guest', name: 'Guest' };
         alert('You must be logged in to log a catch.');
-        
+        return;
     }
 
     const catchData = JSON.parse(localStorage.getItem('catchData')) || [];
