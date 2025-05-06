@@ -17,171 +17,6 @@ a {
     color: inherit;
 }
 
-/*Login page*/
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-
-.auth-contain {
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-    width: 400px;
-    padding: 40px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.app-logo {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 20px;
-    object-fit: contain;
-}
-
-.profile-image-container {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin: 0 auto 20px;
-    border: 5px solid #f8f9fa;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    position: relative;
-}
-
-.profile-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.upload-btn {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background: transparent;
-    color: white;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-h2 {
-    color: #333;
-    margin-bottom: 30px;
-    font-weight: 600;
-}
-
-.input-group {
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-label {
-    display: block;
-    margin-bottom: 8px;
-    color: #555;
-    font-weight: 500;
-}
-
-input {
-    width: 100%;
-    padding: 12px 15px;
-    border: 2px solid #e9ecef;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: all 0.3s;
-}
-
-input:focus {
-    border-color: #667eea;
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
-}
-
-.auth-btn {
-    background: linear-gradient(to right, #667eea, #764ba2);
-    color: white;
-    border: none;
-    padding: 14px;
-    width: 100%;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-    margin-top: 10px;
-}
-
-.auth-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-}
-
-.secondary-action {
-    display: block;
-    margin-top: 20px;
-    color: #667eea;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.secondary-action:hover {
-    text-decoration: underline;
-}
-
-.decoration-circle {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(102, 126, 234, 0.1);
-}
-
-.circle-1 {
-    width: 100px;
-    height: 100px;
-    top: -30px;
-    left: -30px;
-}
-
-.circle-2 {
-    width: 60px;
-    height: 60px;
-    bottom: -20px;
-    right: -20px;
-}
-
-.form-toggle {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #666;
-}
-
-.form-toggle a {
-    color: #667eea;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.form-toggle a:hover {
-    text-decoration: underline;
-}
-
-/* Hide signup form by default */
-#signup-form {
-    display: none;
-}
-
 /* Dashboard Styles */
 .dashboard-header {
     display: flex;
@@ -801,123 +636,200 @@ body {
             }
         }
        /* pop up */
-       .modal {
-        position: fixed;
-        z-index: 1000;
-        left: 0; top: 0;
-        width: 100%; height: 100%;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.6);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      
-     /* .modal-content {
-        background-color: #fff;
-        padding: 25px;
-        border-radius: 10px;
-        width: 90%;
-        max-width: 500px;
-        box-shadow: 0 4px 8px rgba(218, 8, 8, 0.2);
-      }
-        */
-      
-      .close {
-        float: right;
-        font-size: 24px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-      /* drop-down content*/
-      .dropdown {
-        position: relative;
-        max-width: 300px;
-        width: 100%;
-      }
-  
-      .dropdown-button {
-        padding: 10px 12px;
-        width: 100%;
-        background-color: #1738f1;
-        border: 1px solid #1422e9;
-        cursor: pointer;
-        border-radius: 4px;
-      }
-  
-      .dropdown-content {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        max-height: 200px;
-        overflow-y: auto;
-        background: rgb(26, 3, 128);
-        border: 1px solid #3b13eb;
-        border-top: none;
-        display: none;
-        z-index: 1000;
-      }
-  
-      .dropdown-content input {
-        width: 50%;
-        padding: 8px;
-        border: none;
-        border-bottom: 1px solid #ccc;
-        box-sizing: border-box;
-        overflow-x: auto;
-        display: flex;
-      }
-  
-      .dropdown-content div {
-        padding: 8px;
-        cursor: pointer;
-      }
-  
-      .dropdown-content div:hover {
-        background-color: #431cf0;
-      }
-  
-      .show {
-        display: block;
-      }
-  
-      @media (max-width: 600px) {
-        .dropdown {
-          width: 100%;
-        }
-        .dropdown-content input{
-            display: flex;
-            flex-direction: column;
-            width: 50%;
-            overflow: auto;
-        }
-      }
-   /* pop up size reduction*/
-   @media (max-width: 768px) {
-    .modal-content {
-      width: 90%;
-      max-height: 80vh;
-      padding: 15px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .modal-content {
-      width: 95%;
-      max-height: 85vh;
-      padding: 12px;
-    }
-  }
-  .modal-content {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    width: 75%;              /* 3/4 screen width */
-    max-width: 700px;
-    max-height: 70vh;        /* Limit the height */
-    overflow-y: auto;        /* Scroll inside the box */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+       /* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 30, 50, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
     position: relative;
-  }
+    background: linear-gradient(145deg, #f0f8ff, #e1f0fa);
+    border-radius: 12px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(79, 195, 247, 0.3);
+    overflow-y: auto;
+    max-height: 90vh;
+    animation: slideUp 0.4s ease-out;
+}
+
+.modal-content h2 {
+    color: #0d47a1;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #4fc3f7;
+    padding-bottom: 0.5rem;
+}
+
+.close {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 1.8rem;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close:hover {
+    color: #e53935;
+    transform: scale(1.2);
+}
+
+/* Form Styles */
+#verificationForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+#verificationForm label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #0d47a1;
+    font-weight: 500;
+}
+
+#verificationForm select,
+#verificationForm input[type="text"],
+#verificationForm input[type="password"] {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #bbdefb;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f5fbff;
+}
+
+#verificationForm select:focus,
+#verificationForm input[type="text"]:focus,
+#verificationForm input[type="password"]:focus {
+    outline: none;
+    border-color: #4fc3f7;
+    box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.2);
+}
+
+#verificationForm button[type="submit"] {
+    background: linear-gradient(to right, #4fc3f7, #1976d2);
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+#verificationForm button[type="submit"]:hover {
+    background: linear-gradient(to right, #29b6f6, #0d47a1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(25, 118, 210, 0.3);
+}
+
+#forgotPasswordLink {
+    color: #1976d2;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+#forgotPasswordLink:hover {
+    color: #0d47a1;
+    text-decoration: underline;
+}
+
+/* Conditional Field Animation */
+/* License Number Field Animation */
+#licenseNumberLabel {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s ease-out, opacity 0.3s ease, margin 0.3s ease;
+    margin: 0;
+}
+
+#licenseNumberLabel.visible {
+    max-height: 100px;
+    opacity: 1;
+    margin: 0.5rem 0;
+}
+
+#licenseNumberLabel input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #bbdefb;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f5fbff;
+    margin-top: 0.5rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { 
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to { 
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+    .modal-content {
+        padding: 1.5rem;
+        width: 95%;
+    }
     
+    .modal-content h2 {
+        font-size: 1.3rem;
+    }
+    
+    #verificationForm select,
+    #verificationForm input[type="text"],
+    #verificationForm input[type="password"] {
+        padding: 0.7rem;
+    }
+    
+    #verificationForm button[type="submit"] {
+        padding: 0.7rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .modal-content {
+        max-width: 450px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .modal-content {
+        max-width: 500px;
+    }
+}

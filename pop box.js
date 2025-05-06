@@ -53,6 +53,28 @@ document.getElementById('verificationForm').addEventListener('submit', function 
   } else {
     alert("Sorry, you need a valid fishing license number to access the catch log.");
   }
+
+});
+
+// show the licence box
+document.getElementById('hasLicense').addEventListener('change', function() {
+  const licenseLabel = document.getElementById('licenseNumberLabel');
+  
+  if(this.value === 'yes') {
+      // First remove display:none
+      licenseLabel.style.display = 'block';
+      // Force reflow to enable animation
+      void licenseLabel.offsetWidth;
+      // Add visible class to trigger animation
+      licenseLabel.classList.add('visible');
+  } else {
+      // Remove visible class to trigger fade out
+      licenseLabel.classList.remove('visible');
+      // After animation completes, set display:none
+      setTimeout(() => {
+          licenseLabel.style.display = 'none';
+      }, 300); // Match transition duration
+  }
 });
 
 // password Reset
