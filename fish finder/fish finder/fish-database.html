@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Fish Database</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="database.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/jpg" href="LOGO.png" style="border-radius: 50%;">
+</head>
+<body>
+    <header>
+        <div class="container-fish">
+            <h1>Global Fish Database</h1>
+            <p>Explore fish species from around the world</p>
+        </div>
+    </header>
+    <main class="container-fish">
+        <section class="search-sectio">
+            <div class="search-containe">
+                <input type="text" id="search-input" placeholder="Search for fish species...">
+                <button id="search-btn"><i class="fas fa-search"></i> Search</button>
+                <button id="reset-btn"><i class="fas fa-sync-alt"></i> Reset</button>
+            </div>
+            <div class="filter-container">
+                <select id="region-filter">
+                    <option value="">All Regions</option>
+                    <option value="Atlantic">Atlantic Ocean</option>
+                    <option value="Pacific">Pacific Ocean</option>
+                    <option value="Indian">Indian Ocean</option>
+                    <option value="Arctic">Arctic Ocean</option>
+                    <option value="Mediterranean">Mediterranean Sea</option>
+                    <option value="Caribbean">Caribbean Sea</option>
+                    <option value="freshwater">Freshwater</option>
+                </select>
+                <select id="family-filter">
+                    <option value="">All Families</option>
+                    <!-- Will be populated by JavaScript -->
+                </select>
+            </div>
+        </section>
+        <section class="results-section">
+            <div class="results-header">
+                <h2 id="results-title">Featured Fish Species</h2>
+                <div class="pagination-info" id="pagination-info"></div>
+            </div>
+            
+            <div class="fish-grid" id="fish-grid">
+                <!-- Fish cards will be inserted here by JavaScript -->
+                <div class="loading">Loading fish data...</div>
+            </div>
+
+            <div class="pagination-controls">
+                <button id="prev-page" disabled><i class="fas fa-chevron-left"></i> Previous</button>
+                <div class="page-numbers" id="page-numbers"></div>
+                <button id="next-page">Next <i class="fas fa-chevron-right"></i></button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <p>Data provided by <a href="https://www.fishbase.se" target="_blank">FishBase</a></p>
+            <p>&copy; 2023 Global Fish Database. All rights reserved.</p>
+        </div>
+    </footer>
+    <div class="fish-modal" id="fish-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-body" id="modal-body">
+                <!-- Modal content will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
+</body>
+<script src="database.js"></script>
+</html>
