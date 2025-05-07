@@ -195,43 +195,6 @@ a {
     margin-top: 10px;
 }
 
-/* Catch Log Styles */
-.catch-log-main {
-    padding: 30px;
-}
-
-.catch-form {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-}
-
-.form-row {
-    display: flex;
-    gap: 15px;
-}
-
-.form-row .form-group {
-    flex: 1;
-}
-
-.submit-btn {
-    padding: 12px 25px;
-    background-color: #27ae60;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.submit-btn:hover {
-    background-color: #219653;
-}
-
 .catch-history {
     background-color: white;
     padding: 20px;
