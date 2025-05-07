@@ -19,7 +19,7 @@
   <header class="navbar">
     <div class="logo">
       <img src="LOGO.png" alt="Kenya Fishing Guide Logo">
-      <span>Fishing Guide</span>
+      <span>Kenya Fishing Guide</span>
     </div>
     
     <!-- Desktop Navigation -->
@@ -84,8 +84,8 @@
   </div>
 
   <!-- Register Modal -->
-  <div class="modal" id="registerModal">
-    <div class="modal-content">
+  <div class="modal" id="registerModal" >
+    <div class="modal-content" style="height: 75vh; overflow-y: auto;">
       <span class="close-btn" id="closeRegister">&times;</span>
       <h2>Create New Account</h2>
       <form id="registerForm">
@@ -381,7 +381,50 @@
     document.getElementById("closeLogin").addEventListener("click", function () {
       document.getElementById("loginModal").style.display = "none";
     });
+     /* Add to your existing JavaScript */
+ document.addEventListener('DOMContentLoaded', function() {
+   // Add password toggle functionality
+   const passwordInputs = document.querySelectorAll('input[type="password"]');
+   passwordInputs.forEach(input => {
+     const toggle = document.createElement('span');
+     toggle.className = 'password-toggle';
+     toggle.innerHTML = '<i class="far fa-eye"></i>';
+     input.parentNode.appendChild(toggle);
+     
+     toggle.addEventListener('click', function() {
+       if (input.type === 'password') {
+         input.type = 'text';
+         toggle.innerHTML = '<i class="far fa-eye-slash"></i>';
+       } else {
+         input.type = 'password';
+         toggle.innerHTML = '<i class="far fa-eye"></i>';
+       }
+     });
+   });
+ });
+ document.addEventListener('DOMContentLoaded', function() {
+  // Create ripple effects on click
+  document.body.addEventListener('click', function(e) {
+    if (e.target.classList.contains('cta-btn') || 
+        e.target.closest('.feature-card') || 
+        e.target.classList.contains('welcome-text')) {
+      const ripple = document.createElement('span');
+      ripple.classList.add('ripple');
+      document.body.appendChild(ripple);
+      
+      const x = e.pageX;
+      const y = e.pageY;
+      
+      ripple.style.left = x + 'px';
+      ripple.style.top = y + 'px';
+      
+      setTimeout(() => {
+        ripple.remove();
+      }, 6000);
+    }
+  });
+});
   </script>
-  
+
 </body>
 </html>
