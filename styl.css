@@ -43,20 +43,6 @@
     background: rgba(255, 255, 255, 0.85);
     z-index: -1;
   }
-  
-  /* Animated Fish Elements */
-  .fish {
-    position: absolute;
-    width: 50px;
-    height: 30px;
-    background-image: url('https://cdn-icons-png.flaticon.com/512/3079/3079165.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    opacity: 0.7;
-    z-index: -1;
-    animation: swim 15s linear infinite;
-  }
-  
   /* Header/Navbar Styles */
   .navbar {
       display: flex;
@@ -615,6 +601,7 @@
     
     .menu-btn {
       display: block;
+      margin-left: 60%;
     }
     
     .logo span {
@@ -1123,47 +1110,7 @@ footer {
     text-decoration: underline;
   }
   
-  /* Floating Fish Animation */
-  .footer-fish {
-    position: absolute;
-    width: 60px;
-    height: 40px;
-    background-image: url('https://cdn-icons-png.flaticon.com/512/3079/3079165.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    opacity: 0.6;
-    z-index: 0;
-    animation: swimFooter 20s linear infinite;
-  }
   
-  .footer-fish:nth-child(1) {
-    top: 20%;
-    left: -60px;
-    animation-delay: 0s;
-  }
-  
-  .footer-fish:nth-child(2) {
-    top: 50%;
-    left: -60px;
-    animation-delay: 5s;
-    transform: scale(0.8);
-  }
-  
-  .footer-fish:nth-child(3) {
-    top: 70%;
-    left: -60px;
-    animation-delay: 10s;
-    transform: scale(1.2);
-  }
-  
-  @keyframes swimFooter {
-    0% {
-      transform: translateX(-100px);
-    }
-    100% {
-      transform: translateX(calc(100vw + 100px));
-    }
-  }
   
   /* Newsletter Form */
   .newsletter-form {
