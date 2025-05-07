@@ -9,13 +9,7 @@
   <link rel="stylesheet" href="styl.css">
 </head>
 <body>
-  <!-- Animated Fish Background Elements -->
-  <div class="fish"></div>
-  <div class="fish"></div>
-  <div class="fish"></div>
-  <div class="fish"></div>
-
-  <!-- Header/Navbar -->
+   <!-- Header/Navbar -->
   <header class="navbar">
     <div class="logo">
       <img src="LOGO.png" alt="Kenya Fishing Guide Logo">
@@ -189,7 +183,7 @@
       <a href="#"><i class="fab fa-youtube"></i></a>
     </div>
     <div class="copyright">
-      <p>&copy; 2023 Kenya Fishing Guide. All rights reserved. | Designed with <i class="fas fa-heart" style="color: #ff4d4d;"></i> for anglers</p>
+      <p>&copy; <span id="year"></span> Kenya Fishing Guide. All rights reserved. | Designed with <i class="fas fa-heart" style="color: #ff4d4d;"></i> for anglers, Scientists and Tourists </p>
     </div>
   </footer>
 
@@ -423,6 +417,9 @@
       }, 6000);
     }
   });
+});
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("year").textContent = new Date().getFullYear();
 });
   </script>
 
