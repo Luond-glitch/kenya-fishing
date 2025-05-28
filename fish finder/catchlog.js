@@ -117,7 +117,7 @@ function loadUserCatches(currentUser = null) {
         `;
         catchesContainer.appendChild(row);
     });
-}
+} 
 
 // Load user profile image and name (optional enhancement)
 /*window.addEventListener('DOMContentLoaded', () => {
@@ -244,5 +244,4 @@ function loadUserCatches() {
         `;
         catchesContainer.appendChild(row);
     });
-}
-*/
+}*/

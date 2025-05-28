@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
           // Simulate redirect after logout
           setTimeout(() => {
               window.location.href = 'index.html';
-          }, 1500);
+          }, 1000);
       }
   });
 
