@@ -40,7 +40,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.85);
+    /*background: rgba(255, 255, 255, 0.85);*/
     z-index: -1;
   }
   /* Header/Navbar Styles */
@@ -107,7 +107,7 @@
     font-size: 0.95rem;
   }
   
-  .dropdown-menu a:hover {
+  .dropdown-menu :hover {
     background-color: var(--light-blue);
     padding-left: 1.5rem;
     color: var(--primary-blue);
@@ -370,11 +370,11 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.8rem 2rem;
-    background: transparent;
+    background: rgb(91, 91, 228);
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 1000;
+   
   }
   
   .logo {
@@ -395,14 +395,9 @@
   .logo img {
     height: 42px;
     width: auto;
-    transition: transform 0.3s ease;
+    
     border-radius: 50%;
   }
-  
-  .logo:hover img {
-    transform: rotate(15deg);
-  }
-  
   .nav-links {
     display: flex;
     gap: 1.8rem;
@@ -410,27 +405,22 @@
   }
   
   .nav-links a {
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(19, 1, 1, 0.9);
     text-decoration: none;
     font-weight: 500;
     font-size: 1rem;
-    transition: all 0.3s ease;
+    /*transition: all 0.3s ease;*/
     position: relative;
     padding: 0.5rem 0;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    border-radius: 50%;
   }
   
   .nav-links a i {
     font-size: 0.9em;
   }
-  
-  .nav-links a:hover {
-    color: white;
-    transform: translateY(-2px);
-  }
-  
   .nav-links a::after {
     content: '';
     position: absolute;
@@ -442,9 +432,7 @@
     transition: width 0.3s ease;
   }
   
-  .nav-links a:hover::after {
-    width: 100%;
-  }
+  
   
   /* Mobile Menu Button */
   .menu-btn {
@@ -471,8 +459,8 @@
     top: 0;
     right: -100%;
     width: 280px;
-    height: 100vh;
-    background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
+    height: 50vh;
+    background-color: rgb(21, 241, 194);
     transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1100;
     padding: 2rem 1.5rem;
@@ -1185,3 +1173,4 @@ footer {
       font-size: 0.85rem;
     }
   }
+  

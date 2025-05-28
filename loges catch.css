@@ -25,34 +25,6 @@ body::before {
     z-index: 0;
 }
 
-/* Header styling */
-.dashboard-header {
-    position: relative;
-    z-index: 2;
-    background: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-}
-
-.logo img {
-    border-radius: 50%;
-}
-
-.user-profile {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-}
-
-.user-profile img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
 /* Main section */
 .catch-log-main {
     position: relative;
