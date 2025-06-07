@@ -1138,39 +1138,11 @@ footer {
     box-shadow: 0 5px 15px rgba(255, 140, 66, 0.3);
   }
   
-  /* Responsive Footer */
-  @media (max-width: 768px) {
-    .footer-content {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-    
-    .footer-column {
-      margin-bottom: 0;
-    }
-    
-    .footer-column h3 {
-      margin-bottom: 1.2rem;
-    }
-    
-    .social-links {
-      margin: 2rem 0;
-    }
-  }
-  
   @media (max-width: 480px) {
-    footer {
-      padding: 3rem 1.5rem 1.5rem;
-    }
-    
-    .social-links a {
-      width: 40px;
-      height: 40px;
-      font-size: 1.1rem;
-    }
-    
     .copyright {
-      font-size: 0.85rem;
+      font-size: 1rem;
     }
   }
-  
+  marque{
+    height: 100hv;
+  }
