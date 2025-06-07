@@ -1,198 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kenya Fishing Guide - Login</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
-    <link rel="icon" type="image/jpg" href="LOGO.png" style="border-radius: 50%;">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kenya Fishing Guide - Landing</title>
+  <link rel="icon" href="LOGO.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="styl.css">
 </head>
 <body>
-    <div class="auth-contain" style=" margin: auto;">
-        <!-- Decorative circles -->
-        <div class="decoration-circle circle-1"></div>
-        <div class="decoration-circle circle-2"></div>
-        
-        <!-- App Logo -->
-        <img style="border-radius: 50%;" src="LOGO.png" alt="App Logo" class="app-logo" width="86" height="86">
-        
-        <!-- Login Form -->
-        <form id="login-form">
-            <h2>Welcome Back!</h2>
-            
-            <div class="input-group">
-                <label for="login-username">Username</label>
-                <input type="text" id="login-username" placeholder="Enter your username" required>
-            </div>
-            
-            <div class="input-group">
-                <label for="login-password">Password</label>
-                <input type="password" id="login-password" placeholder="Enter your password" maxlength="4" required>
-            </div>
-            
-            <button onclick="login()" type="submit" class="auth-btn">Login</button>
-            
-            <a href="#" class="secondary-action">Forgot Password?</a>
-            
-            <div class="form-toggle">
-                New to our site? <a href="#" onclick="toggleForms()">Create an account</a>
-            </div>
-        </form>
-        
-        <!-- Signup Form -->
-        <form id="signup-form">
-            <h2>Create Account</h2>
-            
-            <!-- Profile Image with Upload Button -->
-            <div class="profile-image-container" style="background-color:burlywood;">
-                <img src="https://via.placeholder.com/100x100?text=Profile" alt="Profile Image" class="profile-image" id="profileImage">
-                <div class="upload-btn" onclick="document.getElementById('profileUpload').click()" style="color: blue;font-weight: 900; line-height: 4rem;">+</div>
-                <input type="file" id="profileUpload" style="display: none;" accept="image/*" onchange="previewImage(this)">
-            </div>
-            
-            <div class="input-group">
-                <label for="signup-username">Username</label>
-                <input type="text" id="signup-username" placeholder="Choose a username" required>
-            </div>
-            <div class="input-group">
-              <label for="signup-fisherman">Profession</label>
-              <input type="text" id="signup-fisherman" placeholder="Enter your profession" required>
-          </div>
-            
-            <div class="input-group">
-                <label for="signup-email">Email</label>
-                <input type="email" id="signup-email" placeholder="Enter your email" required>
-            </div>
-            
-            <div class="input-group">
-                <label for="signup-password">Password</label>
-                <input type="password" id="signup-password" placeholder="Create a password" maxlength="4" required>
-            </div>
-            
-            <div class="input-group">
-                <label for="signup-confirm-password">Confirm Password</label>
-                <input type="password" id="signup-confirm-password" placeholder="Confirm your password" maxlength="4" required>
-            </div>
-            
-            <button type="submit" onclick="register()"class="auth-btn">Register</button>
-            
-            <div class="form-toggle">
-                <a href="index.html">Already have an account? <a href="#" onclick="toggleForms()">Log in</a></a>
-            </div>
-        </form>
+   <!-- Header/Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="LOGO.png" alt="Kenya Fishing Guide Logo">
+      
     </div>
-   </div>
-    <script>
-        // Toggle between login and signup forms
-        function toggleForms() {
-            const loginForm = document.getElementById('login-form');
-            const signupForm = document.getElementById('signup-form');
-            
-            if (loginForm.style.display === 'none') {
-                loginForm.style.display = 'block';
-                signupForm.style.display = 'none';
-            } else {
-                loginForm.style.display = 'none';
-                signupForm.style.display = 'block';
-            }
-        }
+    
+    <!-- Desktop Navigation -->
+    <nav class="nav-links">
+      <a >Fishing Spots</a>
+      <a>Fish Species</a>
+      <a>Fish Analyzer</a>
+      <a>Catch Logs</a>
+      <a>Fish Forecast</a>
+    </nav>
+    <!-- Mobile Menu Button -->
+    <button class="menu-btn" id="menuBtn">
+      <i class="fas fa-bars"></i>
+    </button>
+    <!-- Mobile Sidebar Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+      <span class="close-btn-mobile" id="closeMobileNav">&times;</span>
+      <nav class="mobile-nav-links">
+       <p> Kindly click on get started to enjoy the features of this site</p>
+      </nav>
+    </div>
 
-        // Preview profile image when selected
-        function previewImage(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                
-                reader.onload = function(e) {
-                    document.getElementById('profileImage').src = e.target.result;
-                }
-                
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
+    <div class="user-dropdown">
+      <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User Icon" id="userIcon">
+      <div class="dropdown-menu" id="dropdownMenu">
+        <a href="#" id="loginBtn">Login</a>
+        <a href="#" id="createAccountBtn">Create Account</a>
+        <a href="#" id="logoutBtn">Logout</a>
+      </div>
+    </div>
+  </header>
 
-        // Form submission handlers
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Add actual login logic here
-            function login() {
-      const username = document.getElementById("login-username").value;
-      const password = document.getElementById("login-password").value;
-      const storedUser = localStorage.getItem(username);
-      const errorDiv = document.getElementById("loginError");
+  <!-- Login Modal -->
+  <div class="modal" id="loginModal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeLogin">&times;</span>
+      <h2>Login to Your Account</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="Enter your password" required>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Login</button>
+          <button type="button" class="btn btn-secondary" id="forgotPasswordBtn">Forgot Password?</button>
+        </div>
+        <div class="switch-form">
+          Don't have an account? <a href="#" id="showRegister">Register here</a>
+        </div>
+      </form>
+    </div>
+  </div>
 
-      if (storedUser) {
-        const userData = JSON.parse(storedUser);
-        if (userData.password === password) {
-          // Redirect on successful login
-          window.location.href = "dashboard.html";
-          alert('Login succefully!');
-        } else {
-            errorDiv.textContent = "User does not exist.";
-        }
-      } else {
-        errorDiv.textContent = "Incorrect password.";
-      }
-    }
-            
-        });
+  <!-- Register Modal -->
+  <div class="modal" id="registerModal" >
+    <div class="modal-content" style="height: 75vh; overflow-y: auto;">
+      <span class="close-btn" id="closeRegister">&times;</span>
+      <h2>Create New Account</h2>
+      <form id="registerForm">
+        <div class="form-group">
+          <label for="registerName">Full Name</label>
+          <input type="text" id="registerName" placeholder="Enter your full name" required>
+        </div>
+        <div class="form-group">
+          <label for="registerEmail">Email</label>
+          <input type="email" id="registerEmail" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="text">Contact</label>
+          <input type="text" id="loginContact" placeholder="e.g +255..." required>
+        </div>
+        <div class="form-group">
+          <label for="registerPassword">Password</label>
+          <input type="password" id="registerPassword" placeholder="Create a password" required>
+        </div>
+        <div class="form-group">
+          <label for="registerConfirm">Confirm Password</label>
+          <input type="password" id="registerConfirm" placeholder="Confirm your password" required>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+        <div class="switch-form">
+          Already have an account? <a href="#" id="showLogin">Login here</a>
+        </div>
+      </form>
+    </div>
+  </div>
 
-        document.getElementById('signup-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Basic password match validation
-            const password = document.getElementById('signup-password').value;
-            const confirmPassword = document.getElementById('signup-confirm-password').value;
-            
-            if (password !== confirmPassword) {
-                alert('Passwords do not match!');
-                return;
-            }
-            
-           
-        });
-        // registration page
-    function register() {
-      const username = document.getElementById("signup-username").value;
-      const password = document.getElementById("signup-password").value;
-      const email = document.getElementById("signup-email").value;
-      const user_profession = document.getElementById("signup-fisherman").value;
-      const errorDiv = document.getElementById("registerError");
+  <!-- Main Content -->
+  <main class="landing-content">
+    <div class="welcome-text">
+      <h1>Welcome to Kenya Fishing Guide</h1>
+      <p>Your all-in-one resource for tracking, logging, and mastering fishing in World's beautiful waters. Discover the best spots, learn about local species, and connect with fellow anglers.</p>
+      <a href="dashboard.html"><button class="cta-btn">Get Started</button></a>
+    </div>
+  </main>
 
-      if (!username || !password || !email || !user_profession) {
-        errorDiv.textContent = "Please enter both fields.";
-        return;
-      }
+  <!-- Features Section -->
+  <section class="features">
+    <h2 class="section-title">Our Features</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-map-marked-alt"></i>
+        </div>
+        <h3>Fishing Spots</h3>
+        <p>Discover the best fishing locations across Kenya with detailed maps, access information, and local tips.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-fish"></i>
+        </div>
+        <h3>Species Database</h3>
+        <p>Comprehensive guide to fish species found in Kenyan waters with images, habitats, and catching techniques.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-calendar-alt"></i>
+        </div>
+        <h3>Catch Logs</h3>
+        <p>Record and track your fishing trips, catches, and experiences with our easy-to-use logging system.</p>
+      </div>
+    </div>
+  </section>
 
-      if (localStorage.getItem(username)) {
-        errorDiv.textContent = "Username already exists.";
-      } else {
-        const userData = { username, password };
-        localStorage.setItem(username, JSON.stringify(userData));
-        alert("Account created! You can now log in.");
-        window.location.href = "index.html";
-      }
-    }
-    function login() {
-      const username = document.getElementById("login-username").value;
-      const password = document.getElementById("login-password").value;
-      const storedUser = localStorage.getItem(username);
-      const errorDiv = document.getElementById("loginError");
-
-      if (storedUser) {
-        const userData = JSON.parse(storedUser);
-        if (userData.password === password) {
-          // Redirect on successful login
-          window.location.href = "dashboard.html";
-          alert('Login succefully!');
-        } else {
-          errorDiv.textContent = "Incorrect password.";
-        }
-      } else {
-        errorDiv.textContent = "User does not exist.";
-      }
-    }         
-    </script>   
+    <div class="copyright">
+     <marquee behavior="" direction="rtl" bgcolor ="blue" px="40"> <p>&copy; <span id="year"></span> Kenya Fishing Guide. All rights reserved. | Designed with <i class="fas fa-heart" style="color: #ff4d4d;"></i> for anglers, Scientists and Tourists </p>
+     </marquee>
+    </div>
+ 
+  <script src="index.js"></script>
 </body>
 </html>
